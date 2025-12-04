@@ -19,11 +19,21 @@ TILES = ['#', '.', 'P', 'E', 'T', 'M', 'K', 'D']
 
 # Prompt for the LLM
 PROMPT_TEMPLATE = """<|system|>
-You are a game level designer. Generate ASCII dungeon levels.</s>
+You are a dungeon level designer. Create unique ASCII game levels.</s>
 <|user|>
-Create a {difficulty} difficulty dungeon level ({width}x{height}).
-Use: # for walls, . for floor, P for player start, E for exit, T for treasure, M for monster.
-Include {num_treasures} treasures and {num_monsters} monsters.
-Output only the level grid:</s>
+Generate a {difficulty} dungeon level, exactly {width} characters wide and {height} rows tall.
+Style: {difficulty_description}
+
+Tiles: # wall, . floor, P player, E exit, T treasure, M monster
+
+Requirements:
+- {width} characters per row, {height} rows total
+- # border on all edges
+- 1 P top-left area, 1 E bottom-right area
+- {num_treasures} T and {num_monsters} M scattered throughout
+- Floors and corridors spread across ENTIRE level (left, middle, AND right sides)
+- Connected path from P to E
+
+Generate a unique {difficulty} level now:</s>
 <|assistant|>
 """
